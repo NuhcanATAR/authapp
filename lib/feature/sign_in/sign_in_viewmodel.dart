@@ -18,14 +18,16 @@ abstract class SignInViewModel extends BaseState<SignInView> {
   }
 
   void signIn() {
-    final email = emailController.text;
-    final password = passwordController.text;
+    if (formSignInKey.currentState!.validate()) {
+      final email = emailController.text;
+      final password = passwordController.text;
 
-    context.read<LoginBloc>().add(
-          LoginRequested(
-            email: email,
-            password: password,
-          ),
-        );
+      context.read<LoginBloc>().add(
+            LoginRequested(
+              email: email,
+              password: password,
+            ),
+          );
+    }
   }
 }

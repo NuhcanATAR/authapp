@@ -2,6 +2,7 @@ import 'package:authapp/feature/home/home_view.dart';
 import 'package:authapp/feature/sign_in/bloc/cubit.dart';
 import 'package:authapp/feature/sign_in/bloc/state.dart';
 import 'package:authapp/feature/sign_in/sign_in_viewmodel.dart';
+import 'package:authapp/feature/sign_up/sign_up_view.dart';
 import 'package:authapp/product/core/base/helper/button_control.dart';
 import 'package:authapp/product/core/base/helper/navigator_router.dart';
 import 'package:authapp/product/util/util.dart';
@@ -142,13 +143,19 @@ class _SignInViewState extends SignInViewModel {
                 Flexible(
                   fit: FlexFit.tight,
                   flex: 2,
-                  child: Padding(
-                    padding: BaseUtility.left(
-                      BaseUtility.paddingSmallValue,
+                  child: GestureDetector(
+                    onTap: () => CodeNoahNavigatorRouter.push(
+                      context,
+                      const SignUpView(),
                     ),
-                    child: const BodyMediumMainColorBoldText(
-                      text: 'Sign Up',
-                      textAlign: TextAlign.left,
+                    child: Padding(
+                      padding: BaseUtility.left(
+                        BaseUtility.paddingSmallValue,
+                      ),
+                      child: const BodyMediumMainColorBoldText(
+                        text: 'Sign Up',
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                   ),
                 ),
