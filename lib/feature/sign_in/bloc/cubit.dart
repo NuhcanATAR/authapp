@@ -9,37 +9,37 @@ import 'package:authapp/product/core/service/end_points.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final prefService = PrefService();
 
-  LoginBloc() : super(LoginInitial()) {
-    on<RememberMeControlEvent>(_onRememberMeControl);
-    on<LoginRequested>(_onLoginRequested);
+  SignInBloc() : super(SignInInitial()) {
+    on<RememberMeControlEvent>(onRememberMeControl);
+    on<SignInRequested>(onSignInRequested);
   }
 
-  Future<void> _onRememberMeControl(
+  Future<void> onRememberMeControl(
     RememberMeControlEvent event,
-    Emitter<LoginState> emit,
+    Emitter<SignInState> emit,
   ) async {
     final bool isRememberMe =
         await prefService.getBool(SharedKeys.rememberMe) ?? false;
 
     if (isRememberMe) {
-      emit(LoginSuccess(token: ''));
+      emit(SignInSuccess(token: ''));
     } else {
-      emit(LoginFailure(errorMessage: ''));
+      emit(SignInFailure(errorMessage: ''));
     }
   }
 
-  Future<void> _onLoginRequested(
-    LoginRequested event,
-    Emitter<LoginState> emit,
+  Future<void> onSignInRequested(
+    SignInRequested event,
+    Emitter<SignInState> emit,
   ) async {
-    emit(LoginInProgress());
+    emit(SignInInProgress());
 
     try {
       final response = await http.post(
-        EndPoints.postLogin(),
+        EndPoints.uriParse(EndPoints.signInEndPoint),
         headers: ApiService.headers,
         body: json.encode({
           'email': event.email,
@@ -60,14 +60,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           token,
         );
 
-        emit(LoginSuccess(token: token));
+        emit(SignInSuccess(token: token));
       } else {
-        emit(LoginFailure(errorMessage: json.decode(response.body)['error']));
+        emit(SignInFailure(errorMessage: json.decode(response.body)['error']));
       }
     } catch (error) {
       emit(
-        LoginFailure(
-          errorMessage: 'Bir hata oluştu. Lütfen tekrar deneyin. $error',
+        SignInFailure(
+          errorMessage: 'An error has occurred. Please try again. $error',
         ),
       );
     }
