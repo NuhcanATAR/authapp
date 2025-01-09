@@ -1,4 +1,3 @@
-import 'package:authapp/feature/home/home_view.dart';
 import 'package:authapp/feature/sign_in/bloc/cubit.dart';
 import 'package:authapp/feature/sign_in/bloc/state.dart';
 import 'package:authapp/feature/sign_in/sign_in_viewmodel.dart';
@@ -36,18 +35,11 @@ class _SignInViewState extends SignInViewModel {
           textAlign: TextAlign.center,
         ),
       ),
-      body: BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
-          if (state is LoginSuccess) {
-            CodeNoahNavigatorRouter.pushAndRemoveUntil(
-              context,
-              const HomeView(),
-            );
-          }
-        },
-        child: BlocBuilder<LoginBloc, LoginState>(
+      body: BlocListener<SignInBloc, SignInState>(
+        listener: signInListenerBloc,
+        child: BlocBuilder<SignInBloc, SignInState>(
           builder: (context, state) {
-            if (state is LoginInProgress) {
+            if (state is SignInInProgress) {
               return const Center(child: CircularProgressIndicator());
             }
 
@@ -59,7 +51,7 @@ class _SignInViewState extends SignInViewModel {
   }
 
   // body
-  Widget buildBodyWidget(LoginState state) => Form(
+  Widget buildBodyWidget(SignInState state) => Form(
         key: formSignInKey,
         child: Padding(
           padding: BaseUtility.all(
@@ -84,12 +76,12 @@ class _SignInViewState extends SignInViewModel {
   // title sub title
   Widget get buildTitleSubTitleWidget => TitleSubTitleWidget(
         title: 'Welcome to Auth App 👋',
-        subTitle: 'Auth App Login with your account information.',
+        subTitle: 'Auth App SignIn with your account information.',
         dynamicViewExtensions: dynamicViewExtensions,
       );
 
   // email password
-  Widget buildEmailPasswordWidget(LoginState state) => Column(
+  Widget buildEmailPasswordWidget(SignInState state) => Column(
         children: <Widget>[
           // email
           CustomEmailFieldWidget(
@@ -106,7 +98,7 @@ class _SignInViewState extends SignInViewModel {
             isValidator: true,
             isLabelText: true,
           ),
-          if (state is LoginFailure) ...[
+          if (state is SignInFailure) ...[
             BodyMediumRedText(
               text: state.errorMessage,
               textAlign: TextAlign.left,
@@ -136,7 +128,7 @@ class _SignInViewState extends SignInViewModel {
                   fit: FlexFit.tight,
                   flex: 3,
                   child: BodyMediumBlackText(
-                    text: 'Henüz hesabınız yokmu?',
+                    text: 'Dont have an account yet?',
                     textAlign: TextAlign.right,
                   ),
                 ),

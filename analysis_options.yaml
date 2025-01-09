@@ -12,6 +12,7 @@ analyzer:
     deprecated_member_use: ignore
     avoid_dynamic_calls: ignore
     prefer_const_declarations: ignore
+    type_literal_in_constant_pattern: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

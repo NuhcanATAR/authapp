@@ -1,4 +1,5 @@
 import 'package:authapp/feature/sign_in/bloc/cubit.dart';
+import 'package:authapp/feature/sign_up/bloc/cubit.dart';
 import 'package:authapp/feature/splash/splash_view.dart';
 import 'package:authapp/product/initialize/initialize.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LoginBloc>(
-          create: (BuildContext context) => LoginBloc(),
+        BlocProvider<SignInBloc>(
+          create: (BuildContext context) => SignInBloc(),
+        ),
+        BlocProvider<SignUpBloc>(
+          create: (BuildContext context) => SignUpBloc(),
         ),
       ],
       child: const MaterialApp(
