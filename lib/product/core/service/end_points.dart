@@ -9,6 +9,9 @@ class EndPoints {
   static const String signUpEndPoint =
       '${ApiService.webHttp}://${ApiService.ipv4}:${ApiService.port}/${ApiService.enpointHead}/register';
 
+  static const String profileEndPoint =
+      '${ApiService.webHttp}://${ApiService.ipv4}:${ApiService.port}/${ApiService.enpointHead}/profile';
+
   static Uri uriParse(String endPoint) {
     return Uri.parse(endPoint);
   }
