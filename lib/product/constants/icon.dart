@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 enum AppIcons {
-  accountCircle('account_circle'),
   arrowLeft('arrow_left'),
+  arrowRight('arrow_right'),
   duotoneEmail('duotone_email'),
   monotoneLock('monotone_lock'),
   solidWarning('solid_warning'),

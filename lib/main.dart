@@ -1,3 +1,5 @@
+import 'package:authapp/feature/home/bloc/cubit.dart';
+import 'package:authapp/feature/profile_edit/bloc/cubit.dart';
 import 'package:authapp/feature/sign_in/bloc/cubit.dart';
 import 'package:authapp/feature/sign_up/bloc/cubit.dart';
 import 'package:authapp/feature/splash/splash_view.dart';
@@ -22,6 +24,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<SignUpBloc>(
           create: (BuildContext context) => SignUpBloc(),
+        ),
+        BlocProvider<HomeBloc>(
+          create: (BuildContext context) => HomeBloc(),
+        ),
+        BlocProvider<ProfileBloc>(
+          create: (BuildContext context) => ProfileBloc(),
         ),
       ],
       child: const MaterialApp(
