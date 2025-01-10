@@ -72,8 +72,8 @@ class _NormalTextFieldWidgetState extends BaseState<NormalTextFieldWidget> {
                 ),
             controller: widget.controller,
             validator: (String? value) {
-              final result =
-                  CustomValidator(value: value, context: context).emailCheck;
+              final result = CustomValidator(value: value, context: context)
+                  .emptyNormalCheck;
               setState(() {
                 errorText = result;
               });

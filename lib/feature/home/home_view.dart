@@ -1,10 +1,13 @@
 import 'package:authapp/feature/home/bloc/cubit.dart';
 import 'package:authapp/feature/home/bloc/state.dart';
 import 'package:authapp/feature/home/home_viewmodel.dart';
+import 'package:authapp/feature/profile_edit/profile_edit_view.dart';
 import 'package:authapp/product/constants/icon.dart';
+import 'package:authapp/product/core/base/helper/navigator_router.dart';
 import 'package:authapp/product/model/user_model/user_model.dart';
 import 'package:authapp/product/util/util.dart';
 import 'package:authapp/product/widget/text_widget/body_medium.dart';
+import 'package:authapp/product/widget/text_widget/label_medium.dart';
 import 'package:authapp/product/widget/text_widget/title_large.dart';
 import 'package:authapp/product/widget/text_widget/title_medium.dart';
 import 'package:authapp/product/widget/widget/menu.dart';
@@ -36,7 +39,9 @@ class _HomeViewState extends HomeViewModel {
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {
-            return const CircularProgressIndicator();
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           } else if (state is HomeLoaded) {
             final UserModel user = state.userModel;
             return Padding(
@@ -148,12 +153,22 @@ class _HomeViewState extends HomeViewModel {
               textAlign: TextAlign.left,
             ),
           ),
+          // bio
+          Padding(
+            padding: BaseUtility.bottom(
+              BaseUtility.paddingMediumValue,
+            ),
+            child: LabelMediumBlackText(
+              text: user.profile?.bio ?? 'Bio',
+              textAlign: TextAlign.left,
+            ),
+          ),
           // sub title
           Padding(
             padding: BaseUtility.bottom(
               BaseUtility.paddingMediumValue,
             ),
-            child: BodyMediumBlackText(
+            child: BodyMediumBlackBoldText(
               text: user.email,
               textAlign: TextAlign.left,
             ),
@@ -170,14 +185,19 @@ class _HomeViewState extends HomeViewModel {
           children: <Widget>[
             // user edit
             MenuWidget(
-              onTap: () {},
-              menuText: 'Bilgileri Düzenle',
+              onTap: () => CodeNoahNavigatorRouter.push(
+                context,
+                ProfileEditView(
+                  userModel: user,
+                ),
+              ),
+              menuText: 'Edit Information',
               menuIcon: AppIcons.userOutline,
             ),
             // exit account
             MenuWidget(
-              onTap: () {},
-              menuText: 'Çıkış Yap',
+              onTap: signOut,
+              menuText: 'Sign Out',
               menuIcon: AppIcons.signOut,
             ),
           ],

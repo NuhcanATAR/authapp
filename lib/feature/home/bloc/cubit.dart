@@ -33,8 +33,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         emit(HomeLoaded(userModel));
       } else {
-        emit(HomeError(
-            'An unexpected error occurred. Status code: ${response.statusCode}'));
+        emit(
+          HomeError(
+            'An unexpected error occurred. Status code: ${response.statusCode}',
+          ),
+        );
       }
     } catch (e) {
       emit(HomeError('An error occurred: $e'));
