@@ -12,6 +12,9 @@ class EndPoints {
   static const String profileEndPoint =
       '${ApiService.webHttp}://${ApiService.ipv4}:${ApiService.port}/${ApiService.enpointHead}/profile';
 
+  static const String allUsersEndPoint =
+      '${ApiService.webHttp}://${ApiService.ipv4}:${ApiService.port}/${ApiService.enpointHead}/users';
+
   static Uri uriParse(String endPoint) {
     return Uri.parse(endPoint);
   }

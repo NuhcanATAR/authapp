@@ -2,6 +2,7 @@ import 'package:authapp/feature/home/bloc/cubit.dart';
 import 'package:authapp/feature/home/bloc/state.dart';
 import 'package:authapp/feature/home/home_viewmodel.dart';
 import 'package:authapp/feature/profile_edit/profile_edit_view.dart';
+import 'package:authapp/feature/users/users_view.dart';
 import 'package:authapp/product/constants/icon.dart';
 import 'package:authapp/product/core/base/helper/navigator_router.dart';
 import 'package:authapp/product/model/user_model/user_model.dart';
@@ -193,6 +194,15 @@ class _HomeViewState extends HomeViewModel {
               ),
               menuText: 'Edit Information',
               menuIcon: AppIcons.userOutline,
+            ),
+            // users list
+            MenuWidget(
+              onTap: () => CodeNoahNavigatorRouter.push(
+                context,
+                const UsersView(),
+              ),
+              menuText: 'Kullanıcılar',
+              menuIcon: AppIcons.arrowRight,
             ),
             // exit account
             MenuWidget(
