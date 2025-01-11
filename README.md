@@ -33,15 +33,7 @@ Sistemdeki diğer kullanıcıları görüntüleme imkânı sunar.
 <br><br><br>
 <b>About the Project( EN ): </b> <a href="https://github.com/user-attachments/files/18385357/about-en.pdf"> About the Project EN (PDF)</a>
 
-## Veritabanı ve Endpointler
 
-<table>
-    <tr>
-    <td>
-      <img src="https://github.com/user-attachments/assets/3dcf8d6d-299d-4de9-a9c2-89e665c6279c" width=%100, height=400/>
-    </td>
-  </tr>
-</table>
 ## Trello ( Tamamlandıktan Sonra )
 
 <table>
