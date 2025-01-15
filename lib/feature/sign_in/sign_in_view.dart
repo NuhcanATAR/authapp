@@ -1,3 +1,4 @@
+import 'package:authapp/feature/password/password_view.dart';
 import 'package:authapp/feature/sign_in/bloc/cubit.dart';
 import 'package:authapp/feature/sign_in/bloc/state.dart';
 import 'package:authapp/feature/sign_in/sign_in_viewmodel.dart';
@@ -65,6 +66,8 @@ class _SignInViewState extends SignInViewModel {
                 buildTitleSubTitleWidget,
                 // email password
                 buildEmailPasswordWidget(state),
+                // forgot password
+                buildForgotPasswordWidget,
                 // sign in and sign up
                 buildSignInAndSignUpButtonWidget,
               ],
@@ -105,6 +108,24 @@ class _SignInViewState extends SignInViewModel {
             ),
           ],
         ],
+      );
+
+  // forgot password
+  Widget get buildForgotPasswordWidget => Container(
+        padding: BaseUtility.bottom(
+          BaseUtility.paddingNormalValue,
+        ),
+        alignment: Alignment.centerRight,
+        child: GestureDetector(
+          onTap: () => CodeNoahNavigatorRouter.push(
+            context,
+            const PasswordView(),
+          ),
+          child: const BodyMediumMainColorBoldText(
+            text: 'Forgot Password',
+            textAlign: TextAlign.right,
+          ),
+        ),
       );
 
   // sign in and sign up
