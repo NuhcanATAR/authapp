@@ -54,7 +54,9 @@ dependencies:
   another_flushbar: ^1.12.30
   autocomplete_textfield: ^2.0.1
   animate_do: ^3.3.4
+  flutter_otp_text_field: ^1.4.0+2
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,20 +1,20 @@
-import 'package:authapp/feature/password/password_viewmodel.dart';
+import 'package:authapp/feature/otp/view/new_password/new_password_viewmodel.dart';
 import 'package:authapp/product/core/base/helper/button_control.dart';
 import 'package:authapp/product/util/util.dart';
 import 'package:authapp/product/widget/text_widget/body_medium.dart';
 import 'package:authapp/product/widget/widget/button.dart';
-import 'package:authapp/product/widget/widget/email_field.dart';
+import 'package:authapp/product/widget/widget/password_field.dart';
 import 'package:authapp/product/widget/widget/title_subtitle.dart';
 import 'package:flutter/material.dart';
 
-class PasswordView extends StatefulWidget {
-  const PasswordView({super.key});
+class NewPasswordView extends StatefulWidget {
+  const NewPasswordView({super.key});
 
   @override
-  State<PasswordView> createState() => _PasswordViewState();
+  State<NewPasswordView> createState() => _NewPasswordViewState();
 }
 
-class _PasswordViewState extends PasswordViewModel {
+class _NewPasswordViewState extends NewPasswordViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +30,7 @@ class _PasswordViewState extends PasswordViewModel {
         ),
       ),
       body: Form(
-        key: formPasswordKey,
+        key: formNewPasswordKey,
         child: Padding(
           padding: BaseUtility.all(
             BaseUtility.paddingNormalValue,
@@ -39,8 +39,8 @@ class _PasswordViewState extends PasswordViewModel {
             children: <Widget>[
               // title sub title
               buildTitleSubTitleWidget,
-              // e-mail field
-              buildEmailFieldWidget,
+              // passwords field
+              buildPasswordFieldsWidget,
               // send button
               buildSendButtonWidget,
             ],
@@ -58,19 +58,33 @@ class _PasswordViewState extends PasswordViewModel {
         dynamicViewExtensions: dynamicViewExtensions,
       );
 
-  // e-mail field
-  CustomEmailFieldWidget get buildEmailFieldWidget => CustomEmailFieldWidget(
-        emailController: emailController,
-        hintText: 'E-mail',
-        onChanged: (val) {},
-        isLabelText: true,
+  // passwords field
+  Column get buildPasswordFieldsWidget => Column(
+        children: <Widget>[
+          // password
+          CustomPasswordFieldWidget(
+            passwordController: passwordController,
+            hintText: 'Password',
+            onChanged: (val) {},
+            isLabelText: true,
+            isValidator: true,
+          ),
+          // repead password
+          CustomPasswordFieldWidget(
+            passwordController: repeadPasswordController,
+            hintText: 'Password Repeat',
+            onChanged: (val) {},
+            isLabelText: true,
+            isValidator: true,
+          ),
+        ],
       );
 
   // send button
   CustomButtonWidget get buildSendButtonWidget => CustomButtonWidget(
         dynamicViewExtensions: dynamicViewExtensions,
         text: 'SEND CODE',
-        func: sendCode,
+        func: onPasswordChanged,
         btnStatus: ButtonTypes.primaryColorButton,
       );
 }
